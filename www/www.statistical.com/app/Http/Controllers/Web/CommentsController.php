@@ -107,4 +107,17 @@ class CommentsController extends WebController{
         return redirect('/comment');
     }
     
+    
+    /**
+     * 导入文件示例
+     * @author  jianwei
+     */
+    public function demo()
+    {
+        $file = storage_path('upload/demo.csv');
+        $name = 'demo.csv';
+        $headers = [];
+        return response()->download($file, $name, $headers);
+    }
+    
 }

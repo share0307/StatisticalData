@@ -30,6 +30,8 @@ Route::group(['namespace'=>'Web'],function(){
         Route::any('/list','CommentsController@commentsList');
         //初始化评论表
         Route::any('/init','CommentsController@init');
+        //示例导入文件下载
+        Route::any('/demo','CommentsController@demo');
     });
     
     Route::any('/',function(){
