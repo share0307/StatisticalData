@@ -28,6 +28,8 @@ Route::group(['namespace'=>'Web'],function(){
         Route::any('/check','CommentsController@check');
         //评论列表
         Route::any('/list','CommentsController@commentsList');
+        //初始化评论表
+        Route::any('/init','CommentsController@init');
     });
     
     Route::any('/',function(){

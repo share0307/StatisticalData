@@ -8,6 +8,7 @@ use App\Http\Business\Dao\WordDao;
 use App\Http\Common\Helper;
 use App\Model\CommentsFile;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
 
@@ -220,7 +221,7 @@ class CommentsBusiness extends BusinessBase{
      */
     public function delHistoryComment()
     {
-        return app('CommentsModel')->delete();
+        return DB::delete('delete from kkk_comments;');
     }
     
 }

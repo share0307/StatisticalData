@@ -51,7 +51,7 @@ class CommentsController extends WebController{
         }
     
         //先删除之前的数据
-        
+        //$comments_business->delHistoryComment();
         
         //保存文件
         $upload_response = $comments_business->uploadExcelFile($file);
@@ -92,6 +92,19 @@ class CommentsController extends WebController{
         $comments_list = $comments_business->getCommentList($comment_id_arr);
         
         return $this->jsonFormat($comments_list);
+    }
+    
+    /**
+     * 删除之前的数据
+     * @author  jianwei
+     */
+    public function init(CommentsBusiness $comments_business)
+    {
+        //先删除之前的数据
+        $sb = $comments_business->delHistoryComment();
+        
+//        dd($sb);
+        return redirect('/comment');
     }
     
 }
