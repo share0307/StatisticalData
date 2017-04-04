@@ -24,7 +24,8 @@ class WordDao extends DaoBase{
         $word_obj = $WordsModel->select($select_columns);
     
         $page_size = isset($condition['page_size']) ? $condition['page_size'] : 10;
-        
+    
+        $word_obj->orderby('id','desc');
         if(isset($condition['all']) && $condition['all'] == 'true') {
             $word_list = $word_obj->get();
         }else{

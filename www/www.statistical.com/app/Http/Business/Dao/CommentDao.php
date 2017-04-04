@@ -37,6 +37,7 @@ class Commentdao extends DaoBase{
         }
     
         $comments_obj->groupBy('product_name');
+        //$comments_obj->orderby('product_name');
     
         $comments_list = $comments_obj->get();
     

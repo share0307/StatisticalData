@@ -21,9 +21,13 @@ Route::group(['namespace'=>'Web'],function(){
     //评论
     Route::group(['prefix'=>'/comment',],function(){
         //上传文件
-        Route::any('upload','CommentsController@upload');
+        Route::any('/','CommentsController@index');
+        //上传文件
+        Route::any('/upload','CommentsController@upload');
         //检查
-        Route::any('check','CommentsController@check');
+        Route::any('/check','CommentsController@check');
+        //评论列表
+        Route::any('/list','CommentsController@commentsList');
     });
     
     

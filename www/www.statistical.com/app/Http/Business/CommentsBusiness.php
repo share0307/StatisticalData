@@ -151,7 +151,67 @@ class CommentsBusiness extends BusinessBase{
             }
         }
         
+        //找出相同名称的有多少个
+        $product_name_arr = array_count_values(array_column($response_data,'word'));
+        
+        //再次循环
+        foreach($response_data as $dk=>& $dv){
+            $dv['rowspan'] = 0;
+            if(isset($product_name_arr[$dv['word']])){
+                $dv['rowspan'] = $product_name_arr[$dv['word']];
+                //已经统计完就去掉
+                unset($product_name_arr[$dv['word']]);
+            }
+        }
+        
         return $response_data;
+    }
+    
+    
+    /**
+     * 通过评论文件 id 找到数据
+     * @author  jianwei
+     * @param $comment_file_id  int 评论 id
+     */
+    public function getCommentFile($comment_file_id)
+    {
+        if(!is_numeric($comment_file_id) || $comment_file_id < 1){
+            throw new JsonException(10000);
+        }
+        
+        $comment_file = app('CommentsFileModel')->where('id',$comment_file_id)->first();
+        
+        if(empty($comment_file)){
+            throw new JsonException(20003);
+        }
+        
+        return $comment_file;
+    }
+    
+    /**
+     * 通过部分评论 id 获取数据
+     * @author  jianwei
+     */
+    public function getCommentList(array $comment_id_arr)
+    {
+        if(empty($comment_id_arr)){
+            throw new JsonException(10000);
+        }
+    
+        $CommentsModel = app('CommentsModel');
+    
+        $select_columns = ['*'];
+        $comments_obj = $CommentsModel->select($select_columns);
+    
+        $comments_obj->whereIn('id',$comment_id_arr);
+    
+        $comments_list = $comments_obj->get();
+        
+        if(count($comments_list) < 1){
+            throw new JsonException(30000);
+        }
+        
+        return $comments_list;
     }
     
 }

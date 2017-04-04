@@ -16,10 +16,21 @@ class WordController extends WebController{
     public function index(Request $request, WordBusiness $word_business)
     {
         $condition = $request->all();
+    
+        $condition['all'] = 'true';
         
-        $word_list = $word_business->wordList($condition);
+        try {
+            $word_list = $word_business->wordList($condition);
+        }catch (JsonException $e){
+            $word_list = null;
+        }
         
-        return $this->jsonFormat($word_list);
+        $response_arr = array();
+        //关键词列表
+        $response_arr['word_list'] = $word_list;
+        
+        return view('web.word.list')->with($response_arr);
+        //return $this->jsonFormat($word_list);
     }
     
     /**
@@ -28,7 +39,7 @@ class WordController extends WebController{
      */
     public function create()
     {
-    
+        return view('web.word.create');
     }
     
     /**
@@ -38,9 +49,16 @@ class WordController extends WebController{
     {
         $word_data = $request->all();
     
-        $store_response = $word_business->storeWord($word_data);
+        try {
+            $store_response = $word_business->storeWord($word_data);
+        }catch (JsonException $e){
         
-        return $this->jsonFormat($store_response);
+        }
+        
+        //跳回列表
+        return redirect('/word');
+        
+        //return $this->jsonFormat($store_response);
     }
     
     /**
@@ -75,7 +93,10 @@ class WordController extends WebController{
         
         $destroy_response = $word_business->destroyWord($word_id);
         
-        return $this->jsonFormat($destroy_response);
+        //跳回列表
+        return redirect('/word');
+        
+        //return $this->jsonFormat($destroy_response);
     }
     
     
