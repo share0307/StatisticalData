@@ -27,5 +27,7 @@ class ModelServiceProvider extends ServiceProvider
         $this->app->bind('WordsModel',\App\Model\Words::class);
         //Comment模型
         $this->app->bind('CommentsModel',\App\Model\Comments::class);
+        //excel 文件
+        $this->app->bind('CommentsFileModel',\App\Model\CommentsFile::class);
     }
 }

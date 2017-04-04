@@ -2,10 +2,10 @@
 
 
 
-Route::group([],function(){
+Route::group(['namespace'=>'Web'],function(){
     
     //关键词管理
-    Route::group(['prefix'=>'/word','namespace'=>'Web'],function(){
+    Route::group(['prefix'=>'/word',],function(){
         //关键词列表
         Route::any('/','WordController@index');
         //添加关键词(页面)
@@ -14,12 +14,16 @@ Route::group([],function(){
         Route::any('/store','WordController@store');
         //删除关键词
         Route::any('/destroy','WordController@destroy');
+        //初始化关键词
+        Route::any('/init','WordController@init');
     });
     
     //评论
-    Route::group(['prefix'=>['comment',]],function(){
+    Route::group(['prefix'=>'/comment',],function(){
         //上传文件
         Route::any('upload','CommentsController@upload');
+        //检查
+        Route::any('check','CommentsController@check');
     });
     
     

@@ -25,7 +25,19 @@ class WordDao extends DaoBase{
     
         $page_size = isset($condition['page_size']) ? $condition['page_size'] : 10;
         
-        $word_list = $word_obj->paginate($page_size);
+        if(isset($condition['all']) && $condition['all'] == 'true') {
+            $word_list = $word_obj->get();
+        }else{
+            $word_list = $word_obj->paginate($page_size);
+        }
+        
+        if(count($word_list) < 1){
+            throw new JsonException(20000);
+        }
+        
+        if(!empty($relatives)){
+            $word_list->load($relatives);
+        }
         
         return $word_list;
     }
