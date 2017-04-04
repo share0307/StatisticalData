@@ -50,6 +50,9 @@ class CommentsController extends WebController{
             throw new JsonException(10000);
         }
     
+        //先删除之前的数据
+        
+        
         //保存文件
         $upload_response = $comments_business->uploadExcelFile($file);
         

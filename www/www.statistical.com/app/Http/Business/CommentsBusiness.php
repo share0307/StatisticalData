@@ -214,4 +214,13 @@ class CommentsBusiness extends BusinessBase{
         return $comments_list;
     }
     
+    /**
+     * 先删除之前的数据
+     * @author  jianwei
+     */
+    public function delHistoryComment()
+    {
+        return app('CommentsModel')->delete();
+    }
+    
 }

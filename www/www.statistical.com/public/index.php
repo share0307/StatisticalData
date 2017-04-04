@@ -7,6 +7,17 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+//内存限制
+ini_set('memory_limit','512m');
+//表单提交
+ini_set('post_max_size','50m');
+//
+ini_set('max_input_time',900);
+//上传最大限制
+ini_set('upload_max_filesize','100m');
+//执行15分钟
+set_time_limit(900);
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

@@ -30,6 +30,8 @@ Route::group(['namespace'=>'Web'],function(){
         Route::any('/list','CommentsController@commentsList');
     });
     
-    
+    Route::any('/',function(){
+        return redirect('word/');
+    });
 });
 
