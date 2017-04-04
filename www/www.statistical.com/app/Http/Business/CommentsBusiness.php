@@ -129,7 +129,7 @@ class CommentsBusiness extends BusinessBase{
     public function checkComments($comment_file_id)
     {
         //先取得关键词列表
-        $word_list = $this->word_dao->wordList(['all'=>['true']]);
+        $word_list = $this->word_dao->wordList(['all'=>'true']);
         
         //保存返回的数据
         $response_data = array();

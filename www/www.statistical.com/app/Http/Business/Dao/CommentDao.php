@@ -26,6 +26,7 @@ class Commentdao extends DaoBase{
         $CommentsModel = app('CommentsModel');
     
         $select_column = DB::raw('GROUP_CONCAT(id) as comment_ids, `product_name`');
+        
         $comments_obj = $CommentsModel->select($select_column);
     
         $comments_obj->where('file_id',$comment_file_id);
